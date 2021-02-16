@@ -11,12 +11,12 @@ import Foundation
 
 class CrewViewModel: CrewViewModelType {
     
+    var idForPerson: Int?
     
     func tableViewHeigh() -> Int {
         return castAndCrewMovies.count * 100
     }
     
-   
     var castAndCrewMovies: [PersonMovie] = []
       
     var images: [Profile] = []
@@ -32,19 +32,23 @@ class CrewViewModel: CrewViewModelType {
         self.detailCrew = detailCrew
     }
     
+    init(idForCrew: Int?) {
+        self.idForPerson = idForCrew
+    }
+    
     func numberOfRows() -> Int {
         return images.count
     }
     
     func fetchPersonInfo(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchPeople(id) { (personInfo) in
+        networkManager.fetchPeople(idForPerson ?? 1) { (personInfo) in
             self.personInfo = personInfo
             completion()
         }
     }
     
     func fetchImages(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchPersonImages(id) { [weak self] (images) in
+        networkManager.fetchPersonImages(idForPerson ?? 1) { [weak self] (images) in
             self?.images = images
             completion()
         }
@@ -56,7 +60,7 @@ class CrewViewModel: CrewViewModelType {
     }
     
     func fetchMovies(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchMoviesForPeople(id) { [weak self] (castMovies, crewMovies) in
+        networkManager.fetchMoviesForPeople(idForPerson ?? 1) { [weak self] (castMovies, crewMovies) in
             self?.castAndCrewMovies = castMovies
             self?.castAndCrewMovies.append(contentsOf: crewMovies)
             completion()

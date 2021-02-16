@@ -46,36 +46,57 @@ class MainTableViewCell: UITableViewCell {
             self.posterImage.kf.indicatorType = .activity
             self.posterImage.kf.setImage(with: url)
             
+        }
+    }
+    
+    weak var searchViewModel : SearchTableViewCellViewModelType? {
+        willSet(viewModel) {
             
+            guard let viewModel = viewModel else { return }
+            let posterPath = viewModel.posterPath
+            self.titleLabel.text = viewModel.title
+            if viewModel.voteAverage >= 5.0 {
+                self.voteAverageLabel.textColor = .green
+            } else {
+                self.voteAverageLabel.textColor = .orange
+            }
+            self.voteAverageLabel.text = String(viewModel.voteAverage )
+            self.overviewLabel.text = viewModel.overview
+            self.releaseDataLabel.text = viewModel.releaseDate
             
+            let url = URL(string: Urls.baseImageUrl.rawValue + posterPath)
+            if let newUrl = url {
+                self.posterImage.kf.indicatorType = .activity
+                self.posterImage.kf.setImage(with: newUrl)
+            } else {
+                self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
+            }
             
         }
     }
     
-    
-    
-    
+    weak var peopleViewModel : PeopleSearchTableViewCellViewModelType? {
+        willSet(viewModel) {
+            
+            guard let viewModel = viewModel else { return }
+            let posterPath = viewModel.profilePath
+            self.titleLabel.text = viewModel.name
+            self.overviewLabel.isHidden = true
+            self.voteAverageLabel.isHidden = true
+            self.releaseDataLabel.text = viewModel.knownForDepartment
+            
+            let url = URL(string: Urls.baseImageUrl.rawValue + posterPath)
+            if let newUrl = url {
+                self.posterImage.kf.indicatorType = .activity
+                self.posterImage.kf.setImage(with: newUrl)
+            } else {
+                self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
+            }
+        }
+    }
     
     //MARK: - Functions -
-    func configure(_ result: ResultsOfMovies) {
-        self.titleLabel.text = result.title
-        if result.voteAverage ?? 0 >= 5.0 {
-            self.voteAverageLabel.textColor = .green
-        } else {
-            self.voteAverageLabel.textColor = .orange
-        }
-        self.voteAverageLabel.text = String(result.voteAverage ?? 0)
-        self.overviewLabel.text = result.overview
-        self.releaseDataLabel.text = result.releaseDate
-        if let posterPath = result.posterPath {
-            let url = URL(string: Urls.baseImageUrl.rawValue + posterPath)
-            self.posterImage.kf.indicatorType = .activity
-            self.posterImage.kf.setImage(with: url)
-        } else {
-            self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
-        }
-        
-    }
+    
     func configureFromCoreData(_ result: MovieCoreData) {
         self.titleLabel.text = result.title
         if result.voteAverage >= 5.0 {
@@ -100,17 +121,6 @@ class MainTableViewCell: UITableViewCell {
             self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
         }
     }
-    func configurePeople(_ results: ResultsSearch) {
-        self.titleLabel.text = results.name
-        self.overviewLabel.isHidden = true
-        self.voteAverageLabel.isHidden = true
-        self.releaseDataLabel.text = results.knownForDepartment
-        if let posterPath = results.profilePath {
-            let url = URL(string: Urls.baseImageUrl.rawValue + posterPath)
-            self.posterImage.kf.indicatorType = .activity
-            self.posterImage.kf.setImage(with: url)
-        } else {
-            self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
-        }
-    }
 }
+
+

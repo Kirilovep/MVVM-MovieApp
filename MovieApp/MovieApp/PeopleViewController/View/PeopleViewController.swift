@@ -14,7 +14,7 @@ class PeopleViewController: UIViewController {
     
     //MARK:- Properties -
     
-    var crewViewModel: CrewViewModelType?
+    var crewViewModel: CrewViewModelType? 
     var castViewModel: CastViewModelType? 
     
     //MARK:- IBOutlets-

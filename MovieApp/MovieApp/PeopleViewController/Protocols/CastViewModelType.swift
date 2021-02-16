@@ -10,6 +10,7 @@ import Foundation
 
 protocol CastViewModelType {
 
+    var idForPerson: Int? { get set}
     var detailCast: Cast? { get set }
     var personInfo: People? { get }
     var images: [Profile] { get }

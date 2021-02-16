@@ -10,6 +10,7 @@ import Foundation
 
 protocol CrewViewModelType {
     
+    var idForPerson: Int? { get set }
     var detailCrew: Crew? { get }
     var personInfo: People? { get }
     var images: [Profile] { get }

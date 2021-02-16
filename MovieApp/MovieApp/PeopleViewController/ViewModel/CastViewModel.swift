@@ -10,6 +10,7 @@ import Foundation
 
 
 class CastViewModel: CastViewModelType {
+    var idForPerson: Int?
     
     var castAndCrewMovies: [PersonMovie] = []
      
@@ -28,7 +29,11 @@ class CastViewModel: CastViewModelType {
     private var networkManager = PeopleNetworkManager()
  
     var detailCast: Cast?
- 
+    
+    init(idForCast: Int?) {
+        self.idForPerson = idForCast
+    }
+    
     init(_ detailCast: Cast) {
         self.detailCast = detailCast
     }
@@ -38,13 +43,13 @@ class CastViewModel: CastViewModelType {
     }
     
     func fetchPersonInfo(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchPeople(id) { (personInfo) in
+        networkManager.fetchPeople(idForPerson ?? 1) { (personInfo) in
             self.personInfo = personInfo
             completion()
         }
     }
     func fetchImages(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchPersonImages(id) { [weak self] (images) in
+        networkManager.fetchPersonImages(idForPerson ?? 1) { [weak self] (images) in
             self?.images = images
             completion()
         }
@@ -56,7 +61,7 @@ class CastViewModel: CastViewModelType {
     }
     
     func fetchMovies(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.fetchMoviesForPeople(id) { [weak self] (castMovies, crewMovies) in
+        networkManager.fetchMoviesForPeople(idForPerson ?? 1) { [weak self] (castMovies, crewMovies) in
             self?.castAndCrewMovies = castMovies
             self?.castAndCrewMovies.append(contentsOf: crewMovies)
             completion()
@@ -81,9 +86,5 @@ class CastViewModel: CastViewModelType {
         self.selectedIndexPath = indexPath
     }
     
-//    func viewModelForSelectedRow() -> DetailViewModelType? {
-//        guard let selectedIndexPath = selectedIndexPath else { return nil }
-//        return DetailViewModel(movies: movie[selectedIndexPath.row])
-//    }
     
 }

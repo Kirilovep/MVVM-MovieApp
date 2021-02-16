@@ -10,16 +10,16 @@ import Foundation
 
 
 struct PeopleSearchModel: Codable {
-    let page: Int
-    let totalResults: Int
-    let totalPages: Int
-    let results: [ResultsSearch]
+    let page: Int?
+    let totalResults: Int?
+    let totalPages: Int?
+    let results: [ResultsSearch]?
 }
 
 struct ResultsSearch: Codable {
     let popularity: Double?
     let name: String?
-    let id: Int
+    let id: Int?
     let profilePath: String?
     let adult: Bool?
     let gender: Int?

@@ -28,8 +28,7 @@ protocol DetailViewModelType {
     var results: DetailList? { get }
     
     
-    func viewModelForCastSelectedRow() -> CastViewModelType?
-    func viewModelForCrewSelectedRow() -> CrewViewModelType?
+
     func selectRow(atIndexPath indexPath: IndexPath)
     func numberOfItemsForCast() -> Int
     func numberOfItemsForCrew() -> Int
@@ -41,6 +40,8 @@ protocol DetailViewModelType {
     func castCellViewModel(_ indexPath: IndexPath) -> CollectionViewCastCellViewModel
     func crewCellViewModel(_ IndexPath: IndexPath) -> CollectionViewCrewCellViewModel
     func videosCellViewModel(_ IndexPath: IndexPath) -> CollectionViewVideoCellViewModel
+    func idForCrewPeopleSelectedRow() -> (CrewViewModel?)
+    func idForCastPeopleSelectedRow() -> (CastViewModel?)
 }
 
 

@@ -243,7 +243,7 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
             guard let viewModel = viewModel else { return }
             viewModel.selectRow(atIndexPath: indexPath)
             
-            desVC.castViewModel = viewModel.viewModelForCastSelectedRow()
+            desVC.castViewModel = viewModel.idForCastPeopleSelectedRow()
 
             navigationController?.pushViewController(desVC, animated: true)
         } else if collectionView == crewCollectionView {
@@ -252,7 +252,7 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
             guard let viewModel = viewModel else { return }
             viewModel.selectRow(atIndexPath: indexPath)
             
-            desVC.crewViewModel = viewModel.viewModelForCrewSelectedRow()
+            desVC.crewViewModel = viewModel.idForCrewPeopleSelectedRow()
             
             navigationController?.pushViewController(desVC, animated: true)
         }

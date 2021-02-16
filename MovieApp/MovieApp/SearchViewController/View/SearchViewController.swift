@@ -12,10 +12,7 @@ class SearchViewController: UIViewController {
     
     
     //MARK:- Properties -
-    private var networkManager = NetworkManager()
-    private var quary = ""
-    private var searchResultsMovies: [ResultsOfMovies] = []
-    private var searchResultsPeople: [ResultsSearch] = []
+    private var viewModel: SearchViewModelType?
     private var segment: UISegmentedControl = UISegmentedControl(items: ["Movies", "People"])
     //MARK:- IBOutlets-
     @IBOutlet weak var searchTableView: UITableView! {
@@ -38,6 +35,7 @@ class SearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureSegment()
+        viewModel = SearchViewModel()
     }
     
     //MARK:- private func-
@@ -56,17 +54,15 @@ class SearchViewController: UIViewController {
         segment.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "AvenirNextCondensed-Medium", size: 16)!, NSAttributedString.Key.foregroundColor: UIColor(named: "forSegmentedColor")!], for: .selected)
     }
     private func searchMovie(_ quary: String) { 
-        networkManager.searchMovie(quary) { [weak self] (searchResults) in
+        viewModel?.fetchMovies(quary){ [weak self ] in
             DispatchQueue.main.async {
-                self?.searchResultsMovies = searchResults
                 self?.searchTableView.reloadData()
             }
         }
     }
     private func searchPeople(_ quary: String) {
-        networkManager.searchPeople(quary) { [weak self] (searchPeopleResults) in
+        viewModel?.fetchPeople(quary) { [weak self ] in
             DispatchQueue.main.async {
-                self?.searchResultsPeople = searchPeopleResults
                 self?.searchTableView.reloadData()
             }
         }
@@ -76,14 +72,14 @@ class SearchViewController: UIViewController {
         if segment.selectedSegmentIndex == 0 {
             segment.setTitle("SearchMovies", forSegmentAt: 0)
             segment.setTitle("People", forSegmentAt: 1)
-            searchResultsMovies = []
-            searchResultsPeople = []
+            viewModel?.searchResultsMovies = []
+            viewModel?.searchResultsPeople = []
             searchTableView.reloadData()
         } else if segment.selectedSegmentIndex == 1 {
             segment.setTitle("SearchPeople", forSegmentAt: 1)
             segment.setTitle("Movies", forSegmentAt: 0)
-            searchResultsMovies = []
-            searchResultsPeople = []
+            viewModel?.searchResultsMovies = []
+            viewModel?.searchResultsPeople = []
             searchTableView.reloadData()
         }
     }
@@ -94,45 +90,53 @@ extension SearchViewController: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch segment.selectedSegmentIndex {
         case 0:
-            return searchResultsMovies.count
+            return viewModel?.numberOfMoviesRows() ?? 1
         case 1:
-            return searchResultsPeople.count
+            return viewModel?.numberOfPeopleRows() ?? 1
         default:
             break
         }
-        return searchResultsMovies.count
+        return viewModel?.numberOfMoviesRows() ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cells.mainCellIdentefier.rawValue, for: indexPath) as! MainTableViewCell
+        
         switch segment.selectedSegmentIndex {
         case 0:
-            cell.configure(searchResultsMovies[indexPath.row])
+            let cellViewModel = viewModel?.cellMoviesViewModel(forIndexPath: indexPath)
+            
+            cell.searchViewModel = cellViewModel
         case 1:
-            cell.configurePeople(searchResultsPeople[indexPath.row])
+            let cellViewModel = viewModel?.cellPeopleViewModel(forIndexPath: indexPath)
+            
+            cell.peopleViewModel = cellViewModel
         default:
             return cell
         }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        switch segment.selectedSegmentIndex {
-        case 0:
-            let desVC = storyboard?.instantiateViewController(identifier: ViewControllers.DetailMovieVCIdentifier.rawValue) as! DetailMovieViewController
-            desVC.viewModel = DetailViewModel(id: searchResultsMovies[indexPath.row].id)
-            navigationController?.pushViewController(desVC, animated: true)
-        case 1:
-            let desVC = storyboard?.instantiateViewController(identifier: ViewControllers.PeopleVCIdentifier.rawValue) as! PeopleViewController
-            
-            //
-            navigationController?.pushViewController(desVC, animated: true)
-        default:
-            break
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    
+            switch segment.selectedSegmentIndex {
+            case 0:
+                let desVC = storyboard?.instantiateViewController(identifier: ViewControllers.DetailMovieVCIdentifier.rawValue) as! DetailMovieViewController
+                
+                viewModel?.selectRow(atIndexPath: indexPath)
+                desVC.viewModel = viewModel?.idForMovieSelectedRow()
+                navigationController?.pushViewController(desVC, animated: true)
+            case 1:
+                let desVC = storyboard?.instantiateViewController(identifier: ViewControllers.PeopleVCIdentifier.rawValue) as! PeopleViewController
+                viewModel?.selectRow(atIndexPath: indexPath)
+                desVC.crewViewModel = viewModel?.idForCrewPeopleSelectedRow()
+                desVC.castViewModel = viewModel?.idForCastPeopleSelectedRow()
+                navigationController?.pushViewController(desVC, animated: true)
+            default:
+                break
+            }
+            tableView.deselectRow(at: indexPath, animated: true)
         }
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
 
 //MARK:- SearchBar extension-
@@ -141,26 +145,26 @@ extension SearchViewController: UISearchBarDelegate {
         switch segment.selectedSegmentIndex {
         case 0:
             guard let searchQuary = searchBar.text else { return }
-            quary = searchQuary
-            searchMovie(quary)
+            viewModel?.quarySearch = searchQuary
+            searchMovie(viewModel?.quarySearch ?? " " )
             searchTableView.reloadData()
         case 1:
             guard let searchQuary = searchBar.text else { return }
-            quary = searchQuary
-            searchPeople(quary)
+            viewModel?.quarySearch = searchQuary
+            searchPeople(viewModel?.quarySearch ?? " ")
             searchTableView.reloadData()
         default:
             break
         }
         if searchBar.text?.isEmpty == true {
-            searchResultsPeople = []
-            searchResultsMovies = []
+            viewModel?.searchResultsPeople = []
+            viewModel?.searchResultsMovies = []
             searchTableView.reloadData()
         }
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchResultsMovies = []
-        searchResultsPeople = []
+        viewModel?.searchResultsMovies = []
+        viewModel?.searchResultsPeople = []
         searchTableView.reloadData()
         if searchBar.text?.isEmpty == true {
             view.endEditing(true)

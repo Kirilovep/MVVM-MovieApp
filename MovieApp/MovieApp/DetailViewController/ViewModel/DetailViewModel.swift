@@ -57,11 +57,7 @@ class DetailViewModel: DetailViewModelType {
     var detailCrew: [Crew] = []
     
     var videos: [Video] = []
-    
-//    init(movies: Result) {
-//        self.movies = movies
-//    }
-    
+        
     init(id: Int?) {
         self.id = id
     }
@@ -127,14 +123,14 @@ class DetailViewModel: DetailViewModelType {
         self.selectedIndexPath = indexPath
     }
     
-    func viewModelForCrewSelectedRow() -> CrewViewModelType? {
+    func idForCrewPeopleSelectedRow() -> (CrewViewModel?) {
         guard let selectedIndexPath = selectedIndexPath else { return nil }
-        return CrewViewModel(detailCrew[selectedIndexPath.row])
+        return CrewViewModel(idForCrew: detailCrew[selectedIndexPath.row].id)
     }
     
-    func viewModelForCastSelectedRow() -> CastViewModelType? {
+    func idForCastPeopleSelectedRow() -> (CastViewModel?) {
         guard let selectedIndexPath = selectedIndexPath else { return nil }
-        return CastViewModel(detailCast[selectedIndexPath.row])
+        return CastViewModel(idForCast: detailCast[selectedIndexPath.row].id)
     }
     
 }
