@@ -23,7 +23,7 @@ class CrewViewModel: CrewViewModelType {
   
     var personInfo: People?
     
-    private var networkManager = NetworkManager()
+    private var networkManager = PeopleNetworkManager()
     
     var detailCrew: Crew?
     
@@ -37,14 +37,14 @@ class CrewViewModel: CrewViewModelType {
     }
     
     func fetchPersonInfo(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadPeople(id) { (personInfo) in
+        networkManager.fetchPeople(id) { (personInfo) in
             self.personInfo = personInfo
             completion()
         }
     }
     
     func fetchImages(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadPersonImages(id) { [weak self] (images) in
+        networkManager.fetchPersonImages(id) { [weak self] (images) in
             self?.images = images
             completion()
         }
@@ -56,7 +56,7 @@ class CrewViewModel: CrewViewModelType {
     }
     
     func fetchMovies(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadMoviesForPeople(id) { [weak self] (castMovies, crewMovies) in
+        networkManager.fetchMoviesForPeople(id) { [weak self] (castMovies, crewMovies) in
             self?.castAndCrewMovies = castMovies
             self?.castAndCrewMovies.append(contentsOf: crewMovies)
             completion()

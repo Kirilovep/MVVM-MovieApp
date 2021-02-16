@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		575952C124F9FB3D3C8548F0 /* Pods_MovieApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E40A758DE56BFD6E50C596D /* Pods_MovieApp.framework */; };
+		A6606B6525DC564E0096128B /* MainNetworkManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B6425DC564E0096128B /* MainNetworkManagerType.swift */; };
+		A6606B6825DC56630096128B /* MainNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B6725DC56630096128B /* MainNetworkManager.swift */; };
+		A6606B6E25DC59210096128B /* DetailNetworkManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B6D25DC59210096128B /* DetailNetworkManagerType.swift */; };
+		A6606B7225DC59650096128B /* DetailNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B7125DC59650096128B /* DetailNetworkManager.swift */; };
+		A6606B7825DC5AA20096128B /* PeopleNetworkManagerType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B7725DC5AA20096128B /* PeopleNetworkManagerType.swift */; };
+		A6606B7B25DC5AE60096128B /* PeopleNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6606B7A25DC5AE60096128B /* PeopleNetworkManager.swift */; };
 		BE42422025D542610069292B /* DetailViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42421F25D542610069292B /* DetailViewModelType.swift */; };
 		BE42422425D5432B0069292B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42422325D5432B0069292B /* DetailViewModel.swift */; };
 		BE4831242528F4990056766E /* CrewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4831222528F4990056766E /* CrewCollectionViewCell.swift */; };
@@ -69,6 +75,12 @@
 		07B718B68D240D2DB7A5A088 /* Pods-MovieApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.debug.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6E40A758DE56BFD6E50C596D /* Pods_MovieApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1FC5E4DB2FE5D799F7477D0 /* Pods-MovieApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieApp.release.xcconfig"; path = "Target Support Files/Pods-MovieApp/Pods-MovieApp.release.xcconfig"; sourceTree = "<group>"; };
+		A6606B6425DC564E0096128B /* MainNetworkManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNetworkManagerType.swift; sourceTree = "<group>"; };
+		A6606B6725DC56630096128B /* MainNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNetworkManager.swift; sourceTree = "<group>"; };
+		A6606B6D25DC59210096128B /* DetailNetworkManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNetworkManagerType.swift; sourceTree = "<group>"; };
+		A6606B7125DC59650096128B /* DetailNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNetworkManager.swift; sourceTree = "<group>"; };
+		A6606B7725DC5AA20096128B /* PeopleNetworkManagerType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleNetworkManagerType.swift; sourceTree = "<group>"; };
+		A6606B7A25DC5AE60096128B /* PeopleNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleNetworkManager.swift; sourceTree = "<group>"; };
 		BE42421F25D542610069292B /* DetailViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelType.swift; sourceTree = "<group>"; };
 		BE42422325D5432B0069292B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BE4831222528F4990056766E /* CrewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -149,6 +161,30 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		A6606B6A25DC589A0096128B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A6606B6725DC56630096128B /* MainNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A6606B7425DC59680096128B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A6606B7125DC59650096128B /* DetailNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		A6606B7D25DC5AE90096128B /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				A6606B7A25DC5AE60096128B /* PeopleNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		B33D129C81AFF5F57E867211 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +200,7 @@
 				BED29ACE25D41D7900BA92E6 /* ViewModel */,
 				BE42421725D53CBF0069292B /* View */,
 				BE42421925D53CD10069292B /* Model */,
+				A6606B6A25DC589A0096128B /* Network */,
 			);
 			path = MainViewController;
 			sourceTree = "<group>";
@@ -192,6 +229,7 @@
 				BE42422A25D5444F0069292B /* View */,
 				BE42422725D5433B0069292B /* ViewModel */,
 				BE42422D25D5468A0069292B /* Model */,
+				A6606B7425DC59680096128B /* Network */,
 				BE42422F25D546A00069292B /* Protocols */,
 			);
 			path = DetailViewController;
@@ -236,6 +274,7 @@
 			isa = PBXGroup;
 			children = (
 				BE42421F25D542610069292B /* DetailViewModelType.swift */,
+				A6606B6D25DC59210096128B /* DetailNetworkManagerType.swift */,
 				BEC7F01D25D553D3009727C1 /* CollectionViewCastCellViewModelType.swift */,
 				BEC7F02A25D558AC009727C1 /* CollectionViewCrewCellViewModelType.swift */,
 				BEC7F03325D55E06009727C1 /* CollectionViewVideoCellViewModelType.swift */,
@@ -310,6 +349,7 @@
 			isa = PBXGroup;
 			children = (
 				BE52288B25D585F0005E4B3E /* Model */,
+				A6606B7D25DC5AE90096128B /* Network */,
 				BEC7F04625D566E0009727C1 /* ViewModel */,
 				BEC7F04025D5661C009727C1 /* Protocols */,
 				BEC7F04125D56633009727C1 /* View */,
@@ -324,6 +364,7 @@
 				BE52286525D56D6D005E4B3E /* CastViewModelType.swift */,
 				BE52287425D5774F005E4B3E /* CollectionViewImagesCellViewModelType.swift */,
 				BE52288F25D58A83005E4B3E /* MoviesTableViewCellViewModelType.swift */,
+				A6606B7725DC5AA20096128B /* PeopleNetworkManagerType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -365,6 +406,7 @@
 			children = (
 				BED29AD025D41E0D00BA92E6 /* TableViewModelType.swift */,
 				BED29AD625D4203500BA92E6 /* TableViewCellViewModelType.swift */,
+				A6606B6425DC564E0096128B /* MainNetworkManagerType.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -552,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BED29ADA25D420BD00BA92E6 /* TableViewCellViewModel.swift in Sources */,
+				A6606B6525DC564E0096128B /* MainNetworkManagerType.swift in Sources */,
 				BE52F8FF2527B1BA00A65BCE /* CastCollectionViewCell.swift in Sources */,
 				BEDA1AD8252645E0007A43AF /* MainViewController.swift in Sources */,
 				BEC7F03725D55E49009727C1 /* CollectionViewVideoCellViewModel.swift in Sources */,
@@ -573,12 +616,16 @@
 				BED29ACC25D41D7600BA92E6 /* ViewModel.swift in Sources */,
 				BEF822B5252A9B69008BF172 /* YouTubeNetwork.swift in Sources */,
 				BEC7F02325D5547F009727C1 /* CollectionViewCastCellViewModel.swift in Sources */,
+				A6606B7B25DC5AE60096128B /* PeopleNetworkManager.swift in Sources */,
 				BEDA1AFB252659BB007A43AF /* DetailList.swift in Sources */,
 				BEDA1AD4252645E0007A43AF /* AppDelegate.swift in Sources */,
+				A6606B7825DC5AA20096128B /* PeopleNetworkManagerType.swift in Sources */,
 				BE4831242528F4990056766E /* CrewCollectionViewCell.swift in Sources */,
 				BEC7F01E25D553D3009727C1 /* CollectionViewCastCellViewModelType.swift in Sources */,
 				BE49C9E4252B3F3300F21686 /* PeopleViewController.swift in Sources */,
 				BE4F88C3253364C100709EBB /* SearchViewController.swift in Sources */,
+				A6606B7225DC59650096128B /* DetailNetworkManager.swift in Sources */,
+				A6606B6825DC56630096128B /* MainNetworkManager.swift in Sources */,
 				BE52287525D5774F005E4B3E /* CollectionViewImagesCellViewModelType.swift in Sources */,
 				BE57B94B2552C64D007AA077 /* CoreDataModel.xcdatamodeld in Sources */,
 				BEDA1AF2252648AF007A43AF /* Network.swift in Sources */,
@@ -592,6 +639,7 @@
 				BE6789D6252CD85500E89166 /* PersonMovies.swift in Sources */,
 				BEDA1AEC2526477A007A43AF /* Enums.swift in Sources */,
 				BEDA1AF525264A38007A43AF /* MovieList.swift in Sources */,
+				A6606B6E25DC59210096128B /* DetailNetworkManagerType.swift in Sources */,
 				BE52289425D58AA6005E4B3E /* MoviesTableViewCellViewModel.swift in Sources */,
 				BEDA1AE925264756007A43AF /* MainTableViewCell.swift in Sources */,
 				BED29AD125D41E0D00BA92E6 /* TableViewModelType.swift in Sources */,

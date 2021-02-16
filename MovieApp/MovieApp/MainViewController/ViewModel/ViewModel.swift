@@ -15,7 +15,7 @@ class ViewModel: TableViewViewModelType {
     
     private var selectedIndexPath: IndexPath?
 
-    private var networkManager = NetworkManager()
+    private var networkManager = MainNetworkManager()
     
     var movies: [ResultsOfMovies] = []
     
@@ -30,7 +30,7 @@ class ViewModel: TableViewViewModelType {
     }
     
     func fetchMovies(_ url: String, completion: @escaping() -> ()) {
-        networkManager.loadMovies(url, 1) { [ weak self] (movies) in
+        networkManager.fetchMovies(url, 1) { [ weak self] (movies) in
             self?.movies = movies
             completion()
         }

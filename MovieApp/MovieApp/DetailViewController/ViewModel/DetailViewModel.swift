@@ -12,7 +12,7 @@ class DetailViewModel: DetailViewModelType {
     var id: Int?
     
     var results: DetailList?
-    private var networkManager = NetworkManager()
+    private var networkManager = DetailNetworkManager()
     private var movies: ResultsOfMovies?
     private var selectedIndexPath: IndexPath?
    
@@ -79,7 +79,7 @@ class DetailViewModel: DetailViewModelType {
     }
     
     func fetchDetails(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadDetailMovie(id) { [weak self] (details) in
+        networkManager.fetchDetailMovie(id) { [weak self] (details) in
             guard let details = details else { return }
             self?.results = details
             completion()
@@ -87,21 +87,21 @@ class DetailViewModel: DetailViewModelType {
     }
     
     func fetchCast(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadCast(id) { [weak self] (cast) in
+        networkManager.fetchCast(id) { [weak self] (cast) in
             self?.detailCast = cast
             completion()
         }
     }
     
     func fetchCrew(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadCrew(id) { [weak self] (crew) in
+        networkManager.fetchCrew(id) { [weak self] (crew) in
             self?.detailCrew = crew
             completion()
         }
     }
     
     func fetchVideos(_ id: Int, completion: @escaping () -> ()) {
-        networkManager.loadVideos(id) { [weak self] (videos) in
+        networkManager.fetchVideos(id) { [weak self] (videos) in
             self?.videos = videos
             completion()
         }
