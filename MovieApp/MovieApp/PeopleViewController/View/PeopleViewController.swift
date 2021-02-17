@@ -188,16 +188,16 @@ class PeopleViewController: UIViewController {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         let movieData = MovieCoreData(context: context)
         if castViewModel == nil {
-            movieData.title = crewViewModel?.detailCrew?.name
-            movieData.image = crewViewModel?.detailCrew?.profilePath
-            movieData.department = crewViewModel?.detailCrew?.department
-            let idPeople = Int64(crewViewModel?.detailCrew?.id ?? 0)
+            movieData.title = crewViewModel?.personInfo?.name
+            movieData.image = crewViewModel?.personInfo?.profilePath
+            //movieData.department = crewViewModel?.personInfo?.department
+            let idPeople = Int64(crewViewModel?.personInfo?.id ?? 0)
             movieData.id = idPeople
         } else {
-            movieData.title = castViewModel?.detailCast?.name
-            movieData.image = castViewModel?.detailCast?.profilePath
+            movieData.title = castViewModel?.personInfo?.name
+            movieData.image = castViewModel?.personInfo?.profilePath
             movieData.department = "Actor"
-            let idPeople = Int64(castViewModel?.detailCast?.id ?? 0)
+            let idPeople = Int64(castViewModel?.personInfo?.id ?? 0)
             movieData.id = idPeople
         }
         

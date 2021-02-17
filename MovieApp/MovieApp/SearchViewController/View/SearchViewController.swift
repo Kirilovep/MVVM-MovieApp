@@ -53,15 +53,15 @@ class SearchViewController: UIViewController {
         
         segment.setTitleTextAttributes([NSAttributedString.Key.font : UIFont(name: "AvenirNextCondensed-Medium", size: 16)!, NSAttributedString.Key.foregroundColor: UIColor(named: "forSegmentedColor")!], for: .selected)
     }
-    private func searchMovie(_ quary: String) { 
-        viewModel?.fetchMovies(quary){ [weak self ] in
+    private func searchMovie() {
+        viewModel?.fetchMovies() { [weak self ] in
             DispatchQueue.main.async {
                 self?.searchTableView.reloadData()
             }
         }
     }
-    private func searchPeople(_ quary: String) {
-        viewModel?.fetchPeople(quary) { [weak self ] in
+    private func searchPeople() {
+        viewModel?.fetchPeople() { [weak self ] in
             DispatchQueue.main.async {
                 self?.searchTableView.reloadData()
             }
@@ -146,12 +146,12 @@ extension SearchViewController: UISearchBarDelegate {
         case 0:
             guard let searchQuary = searchBar.text else { return }
             viewModel?.quarySearch = searchQuary
-            searchMovie(viewModel?.quarySearch ?? " " )
+            searchMovie()
             searchTableView.reloadData()
         case 1:
             guard let searchQuary = searchBar.text else { return }
             viewModel?.quarySearch = searchQuary
-            searchPeople(viewModel?.quarySearch ?? " ")
+            searchPeople()
             searchTableView.reloadData()
         default:
             break

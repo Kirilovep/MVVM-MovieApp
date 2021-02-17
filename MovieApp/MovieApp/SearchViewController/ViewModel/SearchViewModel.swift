@@ -22,14 +22,14 @@ class SearchViewModel: SearchViewModelType {
     func numberOfPeopleRows() -> Int {
         return searchResultsPeople.count
     }
-    func fetchMovies(_ query: String, completion: @escaping () -> ()) {
+    func fetchMovies(completion: @escaping () -> ()) {
         networkManager.fetchMovie(quarySearch) { [weak self] (movies) in
             self?.searchResultsMovies = movies
             completion()
         }
     }
     
-    func fetchPeople(_ query: String, completion: @escaping () -> ()) {
+    func fetchPeople(completion: @escaping () -> ()) {
         networkManager.fetchPeople(quarySearch) { [weak self](people) in
             self?.searchResultsPeople = people
             completion()

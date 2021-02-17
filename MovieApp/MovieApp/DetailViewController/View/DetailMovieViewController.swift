@@ -70,6 +70,11 @@ class DetailMovieViewController: UIViewController, AVPlayerViewControllerDelegat
         super.viewDidLoad()
         navigationController?.navigationBar.prefersLargeTitles = false
         hideMoviesInformation(true)
+    }
+    
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         requestDetails()
         requestCasts()
         requestCrews()

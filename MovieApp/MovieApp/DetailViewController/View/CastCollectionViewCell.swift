@@ -15,6 +15,8 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var characterImage: UIImageView!
     @IBOutlet weak var jobLabel: UILabel!
 
+    
+  
     weak var viewModel: CollectionViewCastCellViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else { return }

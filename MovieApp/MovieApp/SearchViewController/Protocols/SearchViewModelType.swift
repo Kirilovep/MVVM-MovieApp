@@ -14,8 +14,8 @@ protocol SearchViewModelType {
     var quarySearch: String { get set }
     var searchResultsPeople: [ResultsSearch] { get set }
     var searchResultsMovies: [ResultsOfMovies] { get set }
-    func fetchMovies(_ query: String, completion: @escaping() -> ())
-    func fetchPeople(_ query: String, completion: @escaping() -> ())
+    func fetchMovies(completion: @escaping() -> ())
+    func fetchPeople(completion: @escaping() -> ())
     func numberOfMoviesRows() -> Int
     func numberOfPeopleRows() -> Int
     func cellMoviesViewModel(forIndexPath IndexPath: IndexPath) -> SearchTableViewCellViewModelType?
