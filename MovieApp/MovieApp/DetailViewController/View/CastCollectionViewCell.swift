@@ -16,6 +16,10 @@ class CastCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var jobLabel: UILabel!
 
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        layoutIfNeeded()
+    }
   
     weak var viewModel: CollectionViewCastCellViewModel? {
         willSet(viewModel) {

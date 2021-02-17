@@ -75,7 +75,7 @@ class MainTableViewCell: UITableViewCell {
         }
     }
     
-    weak var peopleViewModel : PeopleSearchTableViewCellViewModelType? {
+    weak var peopleViewModel: PeopleSearchTableViewCellViewModelType? {
         willSet(viewModel) {
             
             guard let viewModel = viewModel else { return }
@@ -90,6 +90,33 @@ class MainTableViewCell: UITableViewCell {
                 self.posterImage.kf.indicatorType = .activity
                 self.posterImage.kf.setImage(with: newUrl)
             } else {
+                self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
+            }
+        }
+    }
+    
+    weak var favoritesViewModel: FavoritesCellViewModelType? {
+        willSet(viewModel) {
+            self.titleLabel.text = viewModel?.title
+            if viewModel?.voteAverage ?? 1 >= 5.0 {
+                self.voteAverageLabel.textColor = .green
+            } else if viewModel?.voteAverage == 0.0{
+                self.voteAverageLabel.isHidden = true
+            } else {
+                self.voteAverageLabel.textColor = .orange
+            }
+            self.voteAverageLabel.text = String(viewModel?.voteAverage ?? 1)
+            if let releaseDate = viewModel?.releaseDate {
+                self.releaseDataLabel.text = releaseDate
+            } else {
+                self.releaseDataLabel.text = viewModel?.department
+            }
+            self.overviewLabel.text = viewModel?.overview
+            if let posterPath = viewModel?.image {
+                let url = URL(string: Urls.baseImageUrl.rawValue + posterPath)
+                self.posterImage.kf.indicatorType = .activity
+                self.posterImage.kf.setImage(with: url)
+            }else {
                 self.posterImage.image = UIImage(named: Images.noPoster.rawValue)
             }
         }
