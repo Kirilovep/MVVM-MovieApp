@@ -12,17 +12,17 @@ import Foundation
 class ViewModel: TableViewViewModelType {
    
     
-    
+   
     private var selectedIndexPath: IndexPath?
 
-    private var networkManager = MainNetworkManager()
     
     var movies: [ResultsOfMovies] = []
+   
     
     func numberOfRows() -> Int {
         return movies.count
     }
-
+    
     func cellViewModel(forIndexPath IndexPath: IndexPath) -> TableViewCellViewModelType? {
         let loadedMovies = movies[IndexPath.row]
         return TableViewCellViewModel(movies: loadedMovies)
@@ -30,7 +30,7 @@ class ViewModel: TableViewViewModelType {
     }
     
     func fetchMovies(_ url: String, completion: @escaping() -> ()) {
-        networkManager.fetchMovies(url, 1) { [ weak self] (movies) in
+        NetworkManager.shared.fetchMovies(url, 1) { [ weak self] (movies) in
             self?.movies = movies
             completion()
         }

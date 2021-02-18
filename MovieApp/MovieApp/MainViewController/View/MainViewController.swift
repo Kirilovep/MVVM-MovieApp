@@ -12,6 +12,7 @@ class MainViewController: UIViewController {
     
     //MARK:- Properties -
     private var viewModel: TableViewViewModelType?
+ 
     
     //MARK:- IBOutlets-
     @IBOutlet weak var mainSegmentedControl: UISegmentedControl! {
@@ -70,6 +71,7 @@ class MainViewController: UIViewController {
                 self?.mainTableView.reloadData()
             }
         }
+        
     }
     
     private func requestTopRatedMovies() {

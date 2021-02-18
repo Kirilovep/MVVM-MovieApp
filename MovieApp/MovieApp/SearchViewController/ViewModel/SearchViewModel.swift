@@ -14,7 +14,7 @@ class SearchViewModel: SearchViewModelType {
     var searchResultsPeople: [ResultsSearch] = []
     var searchResultsMovies: [ResultsOfMovies] = []
     var quarySearch: String = ""
-    private let networkManager = SearchNetworkManager()
+
     
     func numberOfMoviesRows() -> Int {
         return searchResultsMovies.count
@@ -23,16 +23,17 @@ class SearchViewModel: SearchViewModelType {
         return searchResultsPeople.count
     }
     func fetchMovies(completion: @escaping () -> ()) {
-        networkManager.fetchMovie(quarySearch) { [weak self] (movies) in
+        NetworkManager.shared.fetchMovie(quarySearch) { [weak self] (movies) in
             self?.searchResultsMovies = movies
             completion()
         }
     }
     
     func fetchPeople(completion: @escaping () -> ()) {
-        networkManager.fetchPeople(quarySearch) { [weak self](people) in
+        NetworkManager.shared.fetchPeople(quarySearch) { [weak self](people) in
             self?.searchResultsPeople = people
             completion()
+            
         }
     }
     

@@ -72,6 +72,6 @@ extension FavoritesViewController: UITableViewDataSource, UITableViewDelegate {
          
         }
         favoritesTableView.reloadData()
-    }
+    } 
 }
 

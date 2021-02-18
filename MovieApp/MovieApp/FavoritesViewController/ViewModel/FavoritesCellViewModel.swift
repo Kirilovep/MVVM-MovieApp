@@ -10,7 +10,7 @@ import Foundation
 
 class FavoritesCellViewModel: FavoritesCellViewModelType {
     
-    var favorites: MovieCoreData
+    private var favorites: MovieCoreData
     
     var id: Int64 {
         return favorites.id

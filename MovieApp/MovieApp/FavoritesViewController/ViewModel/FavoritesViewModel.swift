@@ -10,11 +10,9 @@ import Foundation
 import CoreData
 import UIKit
 class FavoritesViewModel: FavoritesViewModelType {
-    
-    
-    
-    
+   
     private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     
     var detailMovies: [MovieCoreData] = []
     
@@ -34,6 +32,8 @@ class FavoritesViewModel: FavoritesViewModelType {
         let loadedMovies = detailMovies[IndexPath.row]
         return FavoritesCellViewModel(favorites: loadedMovies)
     }
+    
+ 
     
     //
 }

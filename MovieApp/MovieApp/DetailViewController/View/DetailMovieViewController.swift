@@ -202,7 +202,7 @@ extension DetailMovieViewController: UICollectionViewDelegate, UICollectionViewD
             
             guard let collectionViewCell = castCell else { return UICollectionViewCell() }
             
-            let cellViewModel = viewModel?.castCellViewModel(indexPath)
+             let cellViewModel = viewModel?.castCellViewModel(indexPath)
             collectionViewCell.viewModel = cellViewModel
             
             return collectionViewCell

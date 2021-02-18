@@ -14,4 +14,5 @@ protocol FavoritesViewModelType {
     func getData()
     func numberOfRows() -> Int
     func cellFavoritesViewModel(forIndexPath IndexPath: IndexPath) -> FavoritesCellViewModelType?
+
 }
