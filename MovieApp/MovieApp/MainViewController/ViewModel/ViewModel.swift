@@ -10,9 +10,16 @@ import Foundation
 
 
 class ViewModel: TableViewViewModelType {
-   
+        
+
+    var totalPages: Int {
+        return moviesData?.totalPages ?? 1
+    }
     
-   
+    var moviesData: MovieList?
+    
+    var currentPage: Int = 1
+
     private var selectedIndexPath: IndexPath?
     var movies: [ResultsOfMovies] = []
     
@@ -27,9 +34,21 @@ class ViewModel: TableViewViewModelType {
     }
     
     func fetchMovies(_ url: String, completion: @escaping() -> ()) {
-        NetworkDataFetcher.shared.fetchMovies(url, 1) { (movies) in
-            self.movies = movies?.results ?? []
+        NetworkDataFetcher.shared.fetchMovies(url, currentPage) { (movies) in
+            self.moviesData = movies
+            self.movies += movies?.results ?? []
             completion()
+        }
+    }
+    
+    func loadMoreMovies(_ url: String,_ indexPath: IndexPath, completion: @escaping() -> ()) {
+        if indexPath.row == movies.count - 3 && currentPage <= totalPages {
+            currentPage += 1
+            NetworkDataFetcher.shared.fetchMovies(url, currentPage) { (movies) in
+                self.moviesData = movies
+                self.movies += movies?.results ?? []
+                completion()
+            }
         }
     }
         

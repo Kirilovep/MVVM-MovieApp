@@ -42,6 +42,9 @@ class FavoritesViewController: UIViewController {
     //MARK: - Private func -
     private func getData() {
         viewModel?.getData()
+        DispatchQueue.main.async {
+            self.favoritesTableView.reloadData()
+        }
     }
 }
 

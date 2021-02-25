@@ -12,7 +12,7 @@ class MainViewController: UIViewController {
     
     //MARK:- Properties -
     private var viewModel: TableViewViewModelType?
- 
+    
     
     //MARK:- IBOutlets-
     @IBOutlet weak var mainSegmentedControl: UISegmentedControl! {
@@ -29,7 +29,7 @@ class MainViewController: UIViewController {
         didSet {
             mainTableView.delegate = self
             mainTableView.dataSource = self
-     
+            
             let nib = UINib(nibName: Cells.mainCellNib.rawValue, bundle: nil)
             mainTableView.register(nib, forCellReuseIdentifier: Cells.mainCellIdentefier.rawValue)
             mainTableView.rowHeight = 150
@@ -43,7 +43,7 @@ class MainViewController: UIViewController {
         
         viewModel = ViewModel()
         requestNowPlayingMovies()
-  
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -55,10 +55,16 @@ class MainViewController: UIViewController {
     @IBAction func tappedSegmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
+            viewModel?.movies = []
+            viewModel?.currentPage = 1
             requestNowPlayingMovies()
         case 1:
+            viewModel?.movies = []
+            viewModel?.currentPage = 1
             requestTopRatedMovies()
         case 2:
+            viewModel?.movies = []
+            viewModel?.currentPage = 1
             requestUpcomingMovies()
         default:
             break
@@ -95,7 +101,7 @@ class MainViewController: UIViewController {
 
 //MARK:- UITableView extension -
 extension MainViewController: UITableViewDelegate,UITableViewDataSource  {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch mainSegmentedControl.selectedSegmentIndex {
         case 0:
@@ -117,8 +123,32 @@ extension MainViewController: UITableViewDelegate,UITableViewDataSource  {
         let cellViewModel = viewModel.cellViewModel(forIndexPath: indexPath)
         
         tableViewcell.viewModel = cellViewModel
-
-        return tableViewcell 
+        
+        
+        switch mainSegmentedControl.selectedSegmentIndex {
+        case 0:
+            viewModel.loadMoreMovies(Urls.nowPlayingMovie.rawValue, indexPath) { [weak self ] in
+                DispatchQueue.main.async {
+                    self?.mainTableView.reloadData()
+                }
+            }
+        case 1:
+            viewModel.loadMoreMovies(Urls.topRatedMovie.rawValue, indexPath) { [weak self ] in
+                DispatchQueue.main.async {
+                    self?.mainTableView.reloadData()
+                }
+            }
+        case 2:
+            viewModel.loadMoreMovies(Urls.upcomingMovie.rawValue, indexPath) { [weak self ] in
+                DispatchQueue.main.async {
+                    self?.mainTableView.reloadData()
+                }
+            }
+            
+        default: break
+        //
+        }
+        return tableViewcell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let desVC = storyboard?.instantiateViewController(identifier: ViewControllers.DetailMovieVCIdentifier.rawValue) as! DetailMovieViewController
@@ -127,7 +157,7 @@ extension MainViewController: UITableViewDelegate,UITableViewDataSource  {
         viewModel.selectRow(atIndexPath: indexPath)
         
         desVC.viewModel = viewModel.viewModelForSelectedRow()
- 
+        
         navigationController?.pushViewController(desVC, animated: true)
         
         tableView.deselectRow(at: indexPath, animated: true)

@@ -63,9 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     // MARK: - Core Data Saving support
 
+
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        
+  
+        
         if context.hasChanges {
             do {
                 try context.save()

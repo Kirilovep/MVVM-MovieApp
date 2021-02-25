@@ -11,8 +11,12 @@ import Foundation
 
 
 protocol TableViewViewModelType {
+    var totalPages: Int { get }
+    var currentPage: Int { get set }
+    var moviesData: MovieList? { get }
+    var movies: [ResultsOfMovies] { get set }
     func numberOfRows() -> Int
-    var movies: [ResultsOfMovies] { get }
+    func loadMoreMovies(_ url: String,_ indexPath: IndexPath, completion: @escaping() -> ())
     func cellViewModel(forIndexPath IndexPath: IndexPath) -> TableViewCellViewModelType?
     func selectRow(atIndexPath indexPath: IndexPath)
     func viewModelForSelectedRow() -> DetailViewModelType?
