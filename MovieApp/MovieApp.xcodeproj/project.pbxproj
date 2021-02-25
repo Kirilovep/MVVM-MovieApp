@@ -19,6 +19,8 @@
 		A66D1F8825DD6BA200F680FC /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D1F8725DD6BA200F680FC /* FavoritesViewModel.swift */; };
 		A66D1F8D25DD6CB300F680FC /* FavoritesCellViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D1F8C25DD6CB300F680FC /* FavoritesCellViewModelType.swift */; };
 		A66D1F9025DD6CCD00F680FC /* FavoritesCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A66D1F8F25DD6CCD00F680FC /* FavoritesCellViewModel.swift */; };
+		A670E0CE25E7A20700935C36 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A670E0CD25E7A20700935C36 /* NetworkService.swift */; };
+		A670E0D125E7A4AB00935C36 /* NetworkDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A670E0D025E7A4AB00935C36 /* NetworkDataFetcher.swift */; };
 		BE42422025D542610069292B /* DetailViewModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42421F25D542610069292B /* DetailViewModelType.swift */; };
 		BE42422425D5432B0069292B /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE42422325D5432B0069292B /* DetailViewModel.swift */; };
 		BE4831242528F4990056766E /* CrewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE4831222528F4990056766E /* CrewCollectionViewCell.swift */; };
@@ -90,6 +92,8 @@
 		A66D1F8725DD6BA200F680FC /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		A66D1F8C25DD6CB300F680FC /* FavoritesCellViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCellViewModelType.swift; sourceTree = "<group>"; };
 		A66D1F8F25DD6CCD00F680FC /* FavoritesCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCellViewModel.swift; sourceTree = "<group>"; };
+		A670E0CD25E7A20700935C36 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A670E0D025E7A4AB00935C36 /* NetworkDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDataFetcher.swift; sourceTree = "<group>"; };
 		BE42421F25D542610069292B /* DetailViewModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModelType.swift; sourceTree = "<group>"; };
 		BE42422325D5432B0069292B /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BE4831222528F4990056766E /* CrewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrewCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -488,6 +492,8 @@
 			children = (
 				BEF822B4252A9B69008BF172 /* YouTubeNetwork.swift */,
 				A65EDEA525DEFBBE007889F1 /* NetworkManager.swift */,
+				A670E0D025E7A4AB00935C36 /* NetworkDataFetcher.swift */,
+				A670E0CD25E7A20700935C36 /* NetworkService.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -613,6 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A670E0D125E7A4AB00935C36 /* NetworkDataFetcher.swift in Sources */,
 				BED29ADA25D420BD00BA92E6 /* TableViewCellViewModel.swift in Sources */,
 				A6606B9E25DC67C20096128B /* PeopleSearchTableViewCellViewModelType.swift in Sources */,
 				BE52F8FF2527B1BA00A65BCE /* CastCollectionViewCell.swift in Sources */,
@@ -647,6 +654,7 @@
 				BEC7F01E25D553D3009727C1 /* CollectionViewCastCellViewModelType.swift in Sources */,
 				BE49C9E4252B3F3300F21686 /* PeopleViewController.swift in Sources */,
 				BE4F88C3253364C100709EBB /* SearchViewController.swift in Sources */,
+				A670E0CE25E7A20700935C36 /* NetworkService.swift in Sources */,
 				A6606B9825DC61A20096128B /* SearchTableViewCellViewModelType.swift in Sources */,
 				BE52287525D5774F005E4B3E /* CollectionViewImagesCellViewModelType.swift in Sources */,
 				BE57B94B2552C64D007AA077 /* CoreDataModel.xcdatamodeld in Sources */,

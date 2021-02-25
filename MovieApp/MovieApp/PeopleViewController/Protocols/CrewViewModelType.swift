@@ -21,7 +21,7 @@ protocol CrewViewModelType {
     func numberOfMoviesRows() -> Int
     func fetchPersonInfo(_ id: Int, completion: @escaping() -> ())
     func fetchImages(_ id: Int, completion: @escaping() -> ())
-    func fetchMovies(_ id: Int, completion: @escaping() -> ())
+    func fetchMovies(_ id: Int, completion: @escaping () -> ())
     func crewCellViewModel(_ indexPath: IndexPath) -> CollectionViewImagesViewModel
     func moviesCellViewModel(_ indexPath: IndexPath) -> MoviesTableViewCellViewModel
 }

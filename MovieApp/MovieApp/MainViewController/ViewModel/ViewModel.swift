@@ -14,10 +14,7 @@ class ViewModel: TableViewViewModelType {
     
    
     private var selectedIndexPath: IndexPath?
-
-    
     var movies: [ResultsOfMovies] = []
-   
     
     func numberOfRows() -> Int {
         return movies.count
@@ -30,12 +27,12 @@ class ViewModel: TableViewViewModelType {
     }
     
     func fetchMovies(_ url: String, completion: @escaping() -> ()) {
-        NetworkManager.shared.fetchMovies(url, 1) { [ weak self] (movies) in
-            self?.movies = movies
+        NetworkDataFetcher.shared.fetchMovies(url, 1) { (movies) in
+            self.movies = movies?.results ?? []
             completion()
         }
     }
-    
+        
     func viewModelForSelectedRow() -> DetailViewModelType? {
         guard let selectedIndexPath = selectedIndexPath else { return nil }
         return DetailViewModel(id: movies[selectedIndexPath.row].id)

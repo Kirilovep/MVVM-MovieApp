@@ -29,6 +29,7 @@ class MainViewController: UIViewController {
         didSet {
             mainTableView.delegate = self
             mainTableView.dataSource = self
+     
             let nib = UINib(nibName: Cells.mainCellNib.rawValue, bundle: nil)
             mainTableView.register(nib, forCellReuseIdentifier: Cells.mainCellIdentefier.rawValue)
             mainTableView.rowHeight = 150

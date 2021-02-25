@@ -74,7 +74,7 @@ class DetailViewModel: DetailViewModelType {
     }
     
     func fetchDetails(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchDetailMovie(id) { [weak self] (details) in
+        NetworkDataFetcher.shared.fetchDetailMovie(id) { [weak self] (details) in
             guard let details = details else { return }
             self?.results = details
             completion()
@@ -82,22 +82,22 @@ class DetailViewModel: DetailViewModelType {
     }
     
     func fetchCast(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchCast(id) { [weak self] (cast) in
-            self?.detailCast = cast
+        NetworkDataFetcher.shared.fetchCastOrCrew(id) { [weak self] (cast) in
+            self?.detailCast = cast?.cast ?? []
             completion()
         }
     }
     
     func fetchCrew(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchCrew(id) { [weak self] (crew) in
-            self?.detailCrew = crew
+        NetworkDataFetcher.shared.fetchCastOrCrew(id) { [weak self] (crew) in
+            self?.detailCrew = crew?.crew ?? []
             completion()
         }
     }
     
     func fetchVideos(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchVideos(id) { [weak self] (videos) in
-            self?.videos = videos
+        NetworkDataFetcher.shared.fetchVideos(id) { [weak self] (videos) in
+            self?.videos = videos?.results ?? []
             completion()
         }
     }

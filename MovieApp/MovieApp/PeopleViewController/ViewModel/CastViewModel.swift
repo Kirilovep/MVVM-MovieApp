@@ -10,6 +10,7 @@ import Foundation
 
 
 class CastViewModel: CastViewModelType {
+
     var idForPerson: Int?
     
     var castAndCrewMovies: [PersonMovie] = []
@@ -41,14 +42,14 @@ class CastViewModel: CastViewModelType {
     }
     
     func fetchPersonInfo(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchPeople(idForPerson ?? 1) { (personInfo) in
+        NetworkDataFetcher.shared.fetchPeople(idForPerson ?? 1) { (personInfo) in
             self.personInfo = personInfo
             completion()
         }
     }
     func fetchImages(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchPersonImages(idForPerson ?? 1) { [weak self] (images) in
-            self?.images = images
+        NetworkDataFetcher.shared.fetchPersonImages(idForPerson ?? 1) { [weak self] (images) in
+            self?.images = images?.profiles ?? []
             completion()
         }
     }
@@ -58,10 +59,11 @@ class CastViewModel: CastViewModelType {
         return CollectionViewImagesViewModel(loadedImages)
     }
     
+ 
     func fetchMovies(_ id: Int, completion: @escaping () -> ()) {
-        NetworkManager.shared.fetchMoviesForPeople(idForPerson ?? 1) { [weak self] (castMovies, crewMovies) in
-            self?.castAndCrewMovies = castMovies
-            self?.castAndCrewMovies.append(contentsOf: crewMovies)
+        NetworkDataFetcher.shared.fetchMoviesForPeople(idForPerson ?? 1) { [weak self] (castMovies, crewMovies) in
+            self?.castAndCrewMovies = castMovies?.cast ?? []
+            self?.castAndCrewMovies.append(contentsOf: crewMovies?.crew ?? [])
             completion()
         }
     }

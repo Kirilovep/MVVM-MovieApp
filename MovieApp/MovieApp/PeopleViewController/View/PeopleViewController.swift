@@ -107,7 +107,7 @@ class PeopleViewController: UIViewController {
                     self?.imagesCollectionView.reloadData()
                 }
             })
-            castViewModel?.fetchMovies(castViewModel?.detailCast?.id ?? 0, completion: { [weak self] in
+            castViewModel?.fetchMovies(crewViewModel?.detailCrew?.id ?? 0, completion: { [weak self] in
                 DispatchQueue.main.async {
                     self?.tableViewHeight.constant = CGFloat(self?.castViewModel?.tableViewHeigh() ?? 1)
                     self?.moviesTableView.reloadData()

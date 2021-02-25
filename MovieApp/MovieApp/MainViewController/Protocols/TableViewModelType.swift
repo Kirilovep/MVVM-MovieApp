@@ -13,7 +13,6 @@ import Foundation
 protocol TableViewViewModelType {
     func numberOfRows() -> Int
     var movies: [ResultsOfMovies] { get }
-    
     func cellViewModel(forIndexPath IndexPath: IndexPath) -> TableViewCellViewModelType?
     func selectRow(atIndexPath indexPath: IndexPath)
     func viewModelForSelectedRow() -> DetailViewModelType?
